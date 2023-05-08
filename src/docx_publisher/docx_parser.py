@@ -22,14 +22,22 @@ def split_docx(doc):
 
     return splitted_files
 
+
 def create_repo(text,start_index):
     repo_path = f"./data/{str(uuid.uuid4())[:4]}"
     repo_path = f"./data/{start_index}"
-
     Path(repo_path).mkdir(exist_ok=True, parents=True)
     text_path = f"{repo_path}/{start_index}_{str(uuid.uuid4())[:4]}.txt"
     Path(text_path).write_text(text)
+    create_readme(Path(repo_path))
     return repo_path
+
+
+def create_readme(path):
+    result = "# EN_BO_WEB"
+    readme_fn = path / "README.md"
+    readme_fn.write_text(result)
+
 
 def create_repos(texts):
     start_index = 7000
