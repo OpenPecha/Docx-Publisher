@@ -46,7 +46,6 @@ def create_repos(texts):
         if i % 2 == 0 and i != 0:
             start_index += 1
         repos.append(create_repo(text,start_index))
-    
     return repos
 
 def main(docx_path):
