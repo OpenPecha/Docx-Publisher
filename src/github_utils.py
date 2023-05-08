@@ -247,4 +247,20 @@ def create_issue(repo_name,org=None,token=None):
     repo = g.get_repo(f"{org}/{repo_name}")
     issue = repo.create_issue(title='Example issue', body='This is an example issue.')
 
-    issue.edit(state='closed')
+    return issue
+
+
+def close_github_issue(repo_name,issue_number, org = None,token=None):
+    try:
+        if not token:
+            token = os.getenv("GITHUB_TOKEN")
+        g = Github(token)
+        if not org:
+            org = "OpenPecha-Data"
+        g = Github(token)
+        repo = g.get_repo(f'{org}/{repo_name}')
+        issue = repo.get_issue(issue_number)
+        issue.edit(state='closed')
+        return True
+    except:
+        return False
